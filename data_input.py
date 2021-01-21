@@ -25,14 +25,18 @@ def load_data(path,norm_size,class_num):
         image=img_to_array(image)
 
         data.append(image)
-        maker = int(each_path.split('/')[-2])
+        #maker = int(each_path.split('/')[-2])
+        maker=int(each_path.split(os.path.sep)[-2])
         # sep切分文件目录，标签类别为文件夹名称的变化，从0-61.如train文件下00014，label=14
 
         label.append(maker)
 
     data=np.array(data,dtype="float") / 255.0  #归一化
-    data = np.expand_dims(data, 0)
-    label=np.array(label)
+    #data = np.expand_dims(data, 0)
+    #data.reshape(-1, 32, 32, 3)
+    #label=np.array(label)
+    #np.ravel(data)
+    #data.reshape(-1, 32, 32, 3)
     label=to_categorical(label,num_classes=class_num)  #转换成类别矩阵
 
     return data,label
